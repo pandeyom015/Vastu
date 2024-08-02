@@ -1,0 +1,21 @@
+# Use PHP 7.4
+<FilesMatch "\.php$">
+    SetHandler application/x-httpd-php74
+</FilesMatch>
+
+# Increase PHP memory limit (example: 256MB)
+php_value memory_limit 256M
+
+# Disable PHP execution in some directories for security
+<Directory /path/to/directory>
+    php_flag engine off
+</Directory>
+
+# Rewrite rules for clean URLs (example)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>
